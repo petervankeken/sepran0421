@@ -1,0 +1,14 @@
+*.nf
+*.out
+meshoutput
+sepplot.*
+a.out
+*.o
+*.mod
+sepcomp.out
+*.dat
+*.eps
+*.pdf
+*.dif
+fort.*
+mpeg_input.2

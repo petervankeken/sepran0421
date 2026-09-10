@@ -1,0 +1,17 @@
+cp bm2d_isoviscous.nml bm2d.nml
+$BINDIR/bm2d < bm2d.in > bm2d_isoviscous.out
+#tail -n 1 bm2d_isoviscous.out
+cp T_restart.nf T_start.nf
+cp UV_restart.nf UV_start.nf
+
+cp bm2d_2b_lowRa.nml bm2d.nml
+$BINDIR/bm2d < bm2d.in > bm2d.out
+#tail -n 1 bm2d.out
+cp T_restart.nf T_start.nf
+cp UV_restart.nf UV_start.nf
+
+cp bm2d_2b.nml bm2d.nml
+$BINDIR/bm2d < bm2d.in > bm2d.out
+tail -n 1 bm2d.out
+
+

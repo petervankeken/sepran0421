@@ -1,0 +1,37 @@
+start
+  renumber Sloan profile
+end
+problem 1
+  types 
+    elgrp1=(type=900)
+  essboundcond
+    degfd2=curves0(c1)
+    degfd2=curves0(c3)
+    degfd1=curves0(c2)
+    degfd1=curves0(c4)
+problem 2
+  types
+    elgrp1=(type=800)
+  essboundcond
+    curves0(c1)
+    curves0(c3)
+end
+
+matrix
+   problem1 storage_scheme=profile,positive_definite
+   problem2 storage_scheme=profile
+end
+
+*create vector problem 1
+* degfd1,func=2
+* degfd2,func=3
+*end
+*create vector problem 2
+*  func=1
+*end
+
+essential boundary conditions problem=1
+essential boundary conditions problem=2
+  curves0(c1),degfd1=(value=1)
+end
+

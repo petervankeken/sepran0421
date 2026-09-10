@@ -1,0 +1,12 @@
+*.o
+sepplot.*
+sepposc.*
+*.mod
+fort*
+mpeg_*
+meshoutput
+*.out
+.*.swp
+*.dat
+mumps.info
+sepranback

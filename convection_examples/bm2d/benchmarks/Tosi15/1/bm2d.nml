@@ -1,0 +1,9 @@
+&bm2d_nml
+Ra=1e2
+irestart=-1
+tosi15=T
+tosi15_case=1
+jtypv=4
+b_eta=11.51292546
+relax=0.5
+/

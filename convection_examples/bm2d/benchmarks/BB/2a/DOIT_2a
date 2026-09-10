@@ -1,0 +1,9 @@
+cp bm2d_lowRa.nml bm2d.nml
+$BINDIR/bm2d < bm2d.in > bm2d.out
+cp T_restart.nf T_start.nf
+cp UV_restart.nf UV_start.nf
+cp bm2d_2a.nml bm2d.nml
+$BINDIR/bm2d < bm2d.in > bm2d.out
+tail -n 1 bm2d.out
+
+

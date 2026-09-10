@@ -1,0 +1,8 @@
+&bm2d_nml
+Ra=1e4
+irestart=-1
+wavel_perturb=2.5
+!jtypv=2
+!b_eta=6.90775528
+!relax=0.5
+/

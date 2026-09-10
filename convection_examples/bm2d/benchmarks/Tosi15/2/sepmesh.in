@@ -1,0 +1,21 @@
+constants
+ integers
+   NX=40
+   NY=40
+end
+mesh2d
+  points 
+    p1=(0,0)
+    p2=(1,0)
+    p3=(1,1)
+    p4=(0,1)
+  curves
+    c1=line2(p1,p2,nelm=NX)
+    c2=line2(p2,p3,nelm=NY)
+    c3=line2(p3,p4,nelm=NX)
+    c4=line2(p4,p1,nelm=NY)
+  surfaces 
+    s1=rectangle4(n=NX,m=NY,c1,c2,c3,c4)
+  renumber(method=2)
+  plot
+end

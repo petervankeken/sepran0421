@@ -1,0 +1,22 @@
+cd 1a
+$BINDIR/bm2d < bm2d.in > bm2d.out 
+tail -n 1 bm2d.out
+
+cp T_restart.nf ../1b/T_start.nf
+cp UV_restart.nf ../1b/UV_start.nf
+cd ../1b
+$BINDIR/bm2d < bm2d.in | tail -n 1
+
+cp T_restart.nf ../1c/T_start.nf
+cp UV_restart.nf ../1c/UV_start.nf
+cd ../1c
+$BINDIR/bm2d < bm2d.in | tail -n 1
+
+cd ..
+cp 1a/T_restart.nf 2a/T_start.nf
+cp 1a/UV_restart.nf 2a/UV_start.nf
+cd 2a
+./DOIT_2a
+
+cd ../2b
+./DOIT_2b

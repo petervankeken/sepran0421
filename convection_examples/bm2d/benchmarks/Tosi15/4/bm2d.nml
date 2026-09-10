@@ -1,0 +1,22 @@
+&bm2d_nml
+Ra=1e2
+irestart=0
+read_velocity=.true.
+steady=.true.
+   eps_convergence=1e-4
+   nsteady_max=100
+   relax=0.5
+
+tosi15=T
+tosi15_case=4
+jtypv=4
+  b_eta=11.51292546
+  c_eta=2.30258509
+  sigma_y=1
+  eta_star=1e-3
+
+ipetsc8=0
+imatrix8=2
+ipetsc9=0
+imatrix9=1 
+/

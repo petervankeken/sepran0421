@@ -1,0 +1,133 @@
+! PvK July 2024
+subroutine bmout()
+use sepmodulekmesh
+use sepmoduleoldrouts
+use sepran_arrays
+use geometry
+use coeff
+use control
+implicit none
+real(kind=8),allocatable,dimension(:) :: funcx,funcy
+real(kind=8) :: smax,tmax,vrms(2),gnus1,gnus2,temp1,q1,q2,q3,q4,rinvec(10),contln=0,plot_format=15.0_8
+integer :: ielhlp=0,ihelp=0,irule,icurvs(3),nunkp,allocate_status,iinvec(10),ncntln=0,ncoord_top,noutje
+real(kind=8), parameter :: DONE=1.0_8,DZERO=0.0_8
+real(kind=8) :: plate_mobility,plateness,plasticity_integral,veloc(10),veloc_d(10),avT(10),avT_d(10),avwork(10),avvisdip(10)
+real(kind=8) :: avphi(10)
+real(kind=8) :: Dil,Ral,DiRal
+
+
+
+if (.not.allocated(funcx)) then
+   allocate(funcx(6+2*npoint),stat=allocate_status)
+   if (allocate_status/=0) then
+      if (print_node) write(irefwr,*) 'PERROR(bmout): allocate on funcx failed: ',allocate_status   
+      call instop
+   endif
+endif
+if (.not.allocated(funcy)) then
+   allocate(funcy(6+npoint),stat=allocate_status)
+   if (allocate_status/=0) then
+      if (print_node) write(irefwr,*) 'PERROR(bmout): allocate on funcy failed: ',allocate_status   
+      call instop
+   endif
+endif
+funcx(1)=1.0_8*(6+2*npoint)
+funcy(1)=1.0_8*(6+npoint)
+
+! Vrms, Nu, and heatflow at top corners
+call pevrms(vrms)
+irule=1
+call deriva(0,2,0,1,0,igradt,kmesh,kprob,isol(2),isol(2),iuser_here,user_here,ihelp)
+temp1 = bounin(1,irule,1,1,kmesh,kprob,1,1,isol(2),iuser_here,user_here)
+if (temp1 < 1e-7) then
+   if (print_node) write(irefwr,*) 'PERROR(bmout): temp along curve 1 is close to 0: ',temp1
+   call instop
+endif
+! this should become part of a generic nusselt() routine
+gnus1 = -bounin(1,irule,1,2,kmesh,kprob,3,3,igradt,iuser_here,user_here)/temp1
+gnus2= bounin(2,irule,1,1,kmesh,kprob,1,1,igradt,iuser_here,user_here)/temp1
+
+icurvs(1)=-1
+icurvs(2)=3
+icurvs(3)=3
+call compcr(0,kmesh,kprob,igradt,2,icurvs,funcx,funcy)
+nunkp=nint(funcy(5))
+q2 = -funcy(6)
+q1 = -funcy(5+nunkp)
+
+icurvs(2) = 1
+icurvs(3) = 1
+call compcr(0,kmesh,kprob,igradt,2,icurvs,funcx,funcy)
+q4 = -funcy(6)
+q3 = -funcy(5+nunkp)
+nx = nunkp
+ny = npoint/nunkp
+
+iinvec(1)=3
+iinvec(2)=3
+iinvec(3)=1
+call manvec(iinvec,rinvec,isol(1),isol(1),isol(1),kmesh,kprob)
+if (print_node) write(irefwr,'(''umin/umax = '',2f13.2)') rinvec(1),rinvec(2)
+iinvec(3)=2
+call manvec(iinvec,rinvec,isol(1),isol(1),isol(1),kmesh,kprob)
+if (print_node) write(irefwr,'(''vmin/vmax = '',2f13.2)') rinvec(1),rinvec(2)
+call plotvc(1,2,isol(1),isol(1),kmesh,kprob,plot_format,DONE,DZERO)
+call plotc1(1,kmesh,kprob,isol(2),contln,ncntln,plot_format,DONE,1)
+
+call create_plasticity
+call surfacevel(kmesh,kprob,isol(1),veloc,veloc_d,ncoord_top,noutje)
+! vsurf,rms is stored in veloc(3) now
+call find_mobility_plateness_cart(vrms,veloc(3),plate_mobility,plateness)
+
+! replace copy of vector by call to compute_total_T
+call copyvc(isol(2),isol(3))
+call averageT(1,iuser_here,user_here,avT)
+write(6,*) 'average T = ',avT(1)
+if (Di > 1e-7_8.or.compress .or. Tosi15) then
+   if (Tosi15) then
+      DiRal=1.0_8/Ra
+      Dil=1.0_8
+   else
+      DiRal=DiRa
+      Dil=Di
+   endif
+   !!  call getvisdip
+   call phifromgrad(kmesh,kprob,isol(1),ivisdip)
+   ! note change 2->7 here 
+   call averageT(2,iuser_here,user_here,avvisdip)
+   !write(6,*) 'average phi =' ,avphi(1)
+
+   call compressionwork()
+   call averageT(3,iuser_here,user_here,avwork)
+   avvisdip(1)=avvisdip(1)*DiRal
+   avwork(1) = avwork(1)*DiRal ! same; note division with Ra in Di/Ra 
+   if (print_node) then
+      !write(irefwr,'(''<phi>     : '',1e15.7)') avphi(1)! avphi(1)*DiRa,DiRa
+      write(irefwr,'(''<work>,<avvisdip>,dW    : '',2e15.7,f12.2)') avwork(1),100*(avvisdip(1)-avwork(1))/avvisdip(1)!,avwork(1)*Di
+      !write(irefwr,'(''<avvisdip>: '',1e15.7,f12.2)') avvisdip(1),100*(avvisdip(1)-avwork(1))/avvisdip(1)
+   endif
+endif
+
+
+
+!write(6,'(i5,f12.4,4f12.3,2f8.2)') niter,dif,vrms,gnus,q1,q2,dcpu,cput
+write(irefwr,*)
+write(irefwr,'(''Niter  '',i12,f12.2)') niter,cput
+write(irefwr,'(''Nu     '',2f12.7)') gnus1,gnus2
+write(irefwr,'(''Vrms   '',f12.7)') vrms(1)
+write(irefwr,'(''q1     '',2f12.7)') q1,q3
+write(irefwr,'(''q2     '',2f12.7)') q2,q4
+
+write(irefwr,'(''Maximum surface velocity '',2f12.7)') veloc(1),veloc_d(1)
+write(irefwr,'(''Average surface velocity '',2f12.7)') veloc(2),veloc_d(2)
+write(irefwr,'(''RMS surface velocity     '',f12.7)') veloc(3)
+
+write(6,'(e15.5,3f15.7,f12.2)') Ra,Di,gnus1,vrms(1),cput
+
+call writbs_netcdf('UV_restart.nf',isol(1))
+call writbs_netcdf('T_restart.nf',isol(2))
+
+if (allocated(funcx)) deallocate(funcx)
+if (allocated(funcy)) deallocate(funcy)
+
+end subroutine bmout

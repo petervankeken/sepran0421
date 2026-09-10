@@ -1,0 +1,8 @@
+&bm2d_nml
+Ra=1e3
+irestart=0
+jtypv=2
+b_eta=9.70406053
+c_eta=4.15888308
+relax=0.5
+/
