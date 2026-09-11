@@ -1,0 +1,15 @@
+problem 
+  types
+    elgrp1=(type=800)
+end
+
+matrix
+  problem=1 storage_scheme=profile
+end
+
+coefficients
+   elgrp1(nparm=20)
+    coef6=1
+    coef9=1
+end
+   

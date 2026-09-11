@@ -1,0 +1,7 @@
+#!/bin/bash
+module purge
+module load netcdf/4.9.2-gnu12   petsc/3.22.1/own_openmpi/gnu12-large   sepran/0421/gnu12/own_openmpi/petsc3.22.1-large
+$SPHOME/bin/compile control_mod.f90 #> /dev/null 2> /dev/null
+$SPHOME/bin/seplink trymc.f90 #> /dev/null 2> /dev/null
+$SPHOME/bin/sepmesh sepmesh.in #> /dev/null
+./trymc < trymc.in | tail -n 20
