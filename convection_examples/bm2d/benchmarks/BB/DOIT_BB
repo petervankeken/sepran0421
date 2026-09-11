@@ -1,5 +1,7 @@
 cd 1a
-$BINDIR/bm2d < bm2d.in > bm2d.out 
+sepmesh sepmesh.in
+$BINDIR/bm2d < bm2d.in | tee  bm2d.out 
+exit
 tail -n 1 bm2d.out
 
 cp T_restart.nf ../1b/T_start.nf
