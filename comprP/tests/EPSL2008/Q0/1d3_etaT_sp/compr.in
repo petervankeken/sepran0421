@@ -1,0 +1,79 @@
+-1 F T T         # solution_method (-1=steady; 0=time dependent)  axi cyl solveT
+0 0 0 0 0 0  0   # isolmethod,iluprec,ipreco,maxiter,iprint,keep,cgeps
+80 1e-3 0.30     # STEADY: maxiter eps relax
+1 2.0 0.005 4.5 1 # TIME-DEPENDENT: ncor tfac dtout_d (Byr) tmax_d (Byr) nbetween
+3 F               # metupw skyfilter
+1.0d4 0.0 F  # Ra Rb_local compress_with_Ra
+3 1.38425 1.1479              # nlay zint(1:nlay-1)
+41 40 43 0.4292 1.4292 1.0 F F F F F # ibot itop imid r1 r2 rmid half quart eighth periodic insul_bot
+2 41 40 1 1  # iclc, icloc(1-iclc) nbp iboundpoints(1-nbp)
+0 0 0.0 0.0      # itypv (viscl(i),i=1,nlay) (e.g., -1 10 1 30)
+0 0 0 0 0 0 0 0 0. # zqact(1-3) Temp0 aqact(1-4) sigma
+0 0 0 0.0025 0.0025 400 # itracoption ndist ifollowchem dr dr_min npix_radial 0.4292 1.4292 0.0 6.2831853072 0.0
+0 0            # numdegas_depth rdegas(1-numdegas_depth)
+0 F 0 0 0      # ndegaszone vardegaszones thmin thmax
+0 0 0 0 0      # ncontzone rcont thmin thmax movecont T (don't touch)
+0 1.5 1.5 1.5 # iqtype q_layer_d(1-nlay) (e.g., 1 0.7)  q_layer_d is the fraction of BSE heating!
+1000 20 0.01      # krestart(-1=conductive)  nsubmax subeps (for non-Newtonian only)
+0 F 1.0        # mcont (1=compressible) cool_core t_bot (don't touch)
+200 100 T      # nth nr rav_output (don't touch)
+0 0 0 0        # idiftype ialphatype pdif palpha  (e.g., 1 1 3 -2 if Di>0).
+2 'cjp.in'
+0.0 3000 273 0  # Di DeltaT Ts_dim nph
+#3e6 400e3 60e3 1500 0.08 # 400: gamma phz0 phdz phT0 drho (gamma =clapeyron slope in Pa/K)
+#-4e6 670e3 60e3 1650 0.11 # 670: gamma phz0 phdz phT0 drho
+*************************************
+problem
+types
+  elgrp1=(type=900,41)
+essboundcond
+  degfd1=curves0(c41)
+  degfd1=curves0(c40)
+  degfd2=curves0(c40)
+  points(p1)
+#  points(p11)
+localtransform
+  degfd1,degfd2=curves0(c41)
+  degfd1,degfd2=curves0(c40)
+end
+                                                                                                                                                            
+problem
+  types
+    elgrp1=(type=800)
+#    elgrp2=(type=-1)
+  essboundcond
+    curves0(c41)
+    curves0(c40)
+end
+                                                                                                                                                            
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end                                                                                                                                                            
+

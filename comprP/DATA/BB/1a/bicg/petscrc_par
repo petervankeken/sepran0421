@@ -1,0 +1,10 @@
+-ksp_type bicg
+-pc_type bjacobi
+-ksp_rtol 1e-4
+-ksp_atol 1e-4
+-ksp_norm_type unpreconditioned
+-ksp_divtol 10000000
+#-ksp_monitor 
+#-log_view :petsc_log.py:ascii_info_detail
+#-log_summary
+#-start_in_debugger

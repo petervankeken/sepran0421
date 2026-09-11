@@ -1,0 +1,38 @@
+start
+end
+problem
+  types
+     elgrp1=(type=903)
+  essboundcond
+     degfd2,curves0(c1)
+     degfd2,curves0(c3)
+     degfd1,curves0(c2)
+     degfd1,curves0(c4)
+  reorder plast
+problem 2
+  types
+    elgrp1=(type=800)
+  essboundcond
+    curves0(c1)
+    curves0(c3)
+end
+
+matrix
+  problem=1 storage_scheme = compact
+  problem=2 storage_scheme = compact
+end
+
+essential boundary conditions problem=1
+* degfd1,curves0(c3),value=10
+end
+essential boundary conditions problem=2
+  degfd1,curves0(c1),value=1
+end
+
+output
+  write 1 solutions
+end
+
+output
+  write 1 solutions
+end

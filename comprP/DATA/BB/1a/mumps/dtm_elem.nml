@@ -1,0 +1,6 @@
+&dtm_elem_nml
+dtm_pressure_mass_matrix=.false.
+dtm_only_pressure_mass_matrix=.false.
+print_matrix=.false.
+do_solve=.true.
+/

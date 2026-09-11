@@ -5,6 +5,7 @@ contains
    !use control
 !#ifdef IFORT
 !use IFPORT
+!
 !#endif
    implicit none
    integer :: iret

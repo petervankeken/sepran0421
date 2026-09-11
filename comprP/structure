@@ -1,0 +1,21 @@
+comprP start
+   read namelist input
+   set up eos
+   sepstr
+   setsepranmodulevalues
+   matstruc (2x)
+   phase change parameters
+   update rho adia
+   update phase info
+   create vectors
+   determine geometry
+   set up temperature bc
+   set up tracers
+   initialize temperature and velocity
+   if necessary solve Stokes equations to update temperature
+
+if (steady) then
+    steady_state_computation
+else
+    time_dependent_computation
+endif

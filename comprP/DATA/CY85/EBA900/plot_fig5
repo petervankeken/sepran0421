@@ -1,0 +1,37 @@
+region=-0.6/0.4/1/20
+scale=X12c/8cl
+file=fig5
+psbasemap -J$scale -R$region -K -Ba0.1:"P":/a2f3:"Nu":WSne > $file.eps
+
+rm Nu_0.dat Nu_0.25.dat Nu_0.5.dat
+for Pn in  -4 -3 -2 -1
+do
+   let P=-$Pn
+   Nu=`cat 4d5_0/comprP_P-0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print -$1*0.1,$2}' >> Nu_0.dat
+   Nu=`cat 4d5_0.25/comprP_P-0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print -$1*0.1,$2}' >> Nu_0.25.dat
+   Nu=`cat 4d5_0.5/comprP_P-0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print -$1*0.1,$2}' >> Nu_0.5.dat
+done
+for P in  0 1 2 3
+do
+   Nu=`cat 4d5_0/comprP_P0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print $1*0.1,$2}' >> Nu_0.dat
+   Nu=`cat 4d5_0.25/comprP_P0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print $1*0.1,$2}' >> Nu_0.25.dat
+   Nu=`cat 4d5_0.5/comprP_P0."$P".out | tail -n 2 | head -n 1 | awk '{print $4}'`
+   echo $P $Nu | awk '{print $1*0.1,$2}' >> Nu_0.5.dat
+done
+
+psxy -J -R -K -O -W1 Nu_0.dat >> $file.eps
+psxy -J -R -K -O -W1 Nu_0.25.dat >> $file.eps
+psxy -J -R -K -O -W1 Nu_0.5.dat >> $file.eps
+psxy -J -R -K -O -Sc0.15 Nu_0.dat >> $file.eps
+psxy -J -R -K -O -Ss0.2 Nu_0.25.dat >> $file.eps
+psxy -J -R -K -O -St0.15 Nu_0.5.dat >> $file.eps
+
+echo "showpage" >> $file.eps
+ps2pdf $file.eps
+xpdf $file.pdf
+

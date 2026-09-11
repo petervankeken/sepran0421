@@ -1,0 +1,375 @@
+advance_tracers_jgr97.f90
+allocate_tracers.f90
+averages.f90
+averageT.f90
+blobs_mod.f90
+bmout.f90
+bmstokes.f90
+brandenburg_mod.f90
+checkbounds.f90
+checkinelem.f90
+check_parallel.f90
+check_stress_tensor.f90
+coef800_print.f90
+coef900_print.f90
+coeff_mod.f90
+coefpress.f90
+coefvis.f90
+cofcopy.f90
+compressionwork.f90
+comprP.f90
+comprP_post.f90
+comprP_start.f90
+control_mod.f90
+convparam_mod.f90
+copcoor.f90
+corrh.f90
+create_additional_vectors.f90
+create_area_array.f90
+debugTbars_mod.f90
+detelemtrac_cart.f90
+detelemtrac_cyl.f90
+detelemtrac.f90
+determine_geometry.f90
+detrminmax.f90
+do_gable_solve.f90
+dtm_elem_mod.f90
+dtm_p_mass.f90
+elm900rhsd.f90
+eos_mod.f90
+fillcoef800.f90
+fillcoef900.f90
+find_C_int.f90
+findheatgen.f90
+find_melt_zones.f90
+fnv003.f90
+force_balance_setup.f90
+funcbc.f90
+funccf.f90
+func.f90
+funvec.f90
+geometry_mod.f90
+getsepraninfomatr.f90
+getvisdip.f90
+handle_err_netcdf.f90
+icheckinelem.f90
+ielfromgrid.f90
+ieltogrid.f90
+ieulh.f90
+init_eos.f90
+initialize_temp_vel.f90
+inittrac_cart_1_bench4.f90
+inittrac_cart_1.f90
+inittrac_cart_blob.f90
+inittrac_cart.f90
+inittrac_cart_old.f90
+inittrac_cyl.f90
+inittrac.f90
+inittracheat.f90
+instop.f90
+ivalfind1.f90
+ivalfind.f90
+lengzhong.f90
+logcmb.f90
+makecrust_cart.f90
+makecrust_cyl.f90
+makecrust.f90
+mardiv.f90
+movecont.f90
+move_tracers4_cart.f90
+move_tracers4_cyl.f90
+move_tracers4.f90
+mtime_mod.f90
+nusseltP.f90
+parallel_mod.f90
+pecophi.f90
+pecopy.f90
+pedetel.f90
+pedeteltrac.f90
+pedeteltrac_subs.f90
+pedtcf.f90
+pefbuoy1.f90
+pefilbuoy.f90
+pefilcof_cyl_old.f90
+pefilcof.f90
+pefilxy.f90
+pefvis.f90
+pel3003.f90
+pemultphivisc.f90
+peplotit.f90
+petrac_mod.f90
+pevrms.f90
+phifromgrad.f90
+plafp6.f90
+predcoort.f90
+prepare_ystretch.f90
+print_final_eos.f90
+pvk_allocate.f90
+ramp.f90
+ran0.f90
+readbs_netcdf.f90
+read_namelist_input.f90
+readtrac.f90
+readtrac_netcdf.f90
+remarker.f90
+second.f90
+sepgetinfo.f90
+sepran_arrays_mod.f90
+sepran_interface_mod.f90
+sepreplmethod.f90
+set_up_chempost_logs.f90
+set_up_eos.f90
+setup_temperature_bc.f90
+set_up_tracers.f90
+sol2vtu.f90
+sper01_mod.f90
+steady_heatP.f90
+steady_iteration.f90
+stokesP.f90
+stokesP_new.f90
+stress_chain_subs.f90
+subtract_average_rotation.f90
+surfacevel.f90
+temptogrid.f90
+test_tracer_accuracy.f90
+time_integration.f90
+time_int_output.f90
+toGMT.f90
+tracdens.f90
+tracdens_subs.f90
+tracerout.f90
+tracerout_netcdf.f90
+tracers_mod.f90
+tracrhsd.f90
+tracrhsd_subs.f90
+tracvel.f90
+trap_allocate.f90
+trilin.f90
+update_rho.f90
+use_tracers_from_cian_or_nate.f90
+velintmark_cart.f90
+velintmark_cyl.f90
+velocity_bc.f90
+vrms_r_theta.f90
+writbs_netcdf.f90
+advance_tracers_jgr97.f90
+allocate_tracers.f90
+averages.f90
+averageT.f90
+blobs_mod.f90
+bmout.f90
+bmstokes.f90
+brandenburg_mod.f90
+checkbounds.f90
+checkinelem.f90
+check_parallel.f90
+check_stress_tensor.f90
+coef800_print.f90
+coef900_print.f90
+coeff_mod.f90
+coefpress.f90
+coefvis.f90
+cofcopy.f90
+compressionwork.f90
+comprP.f90
+comprP_post.f90
+comprP_start.f90
+17d16
+< use sepmoduleintmat
+41c40
+< integer :: commat_in(20)=0,ipoint,alloc_status,numpar
+---
+> integer :: commat_in(20),ipoint,alloc_status,numpar
+258d256
+< nested=.false.
+267,269d264
+< ! Emergency intervention for change in 0421. For some reason normal 
+< ! profile matrix is seen as nested (see sepfillmatrstr1)
+< nested=.false.
+control_mod.f90
+convparam_mod.f90
+copcoor.f90
+corrh.f90
+create_additional_vectors.f90
+create_area_array.f90
+debugTbars_mod.f90
+detelemtrac_cart.f90
+detelemtrac_cyl.f90
+detelemtrac.f90
+determine_geometry.f90
+detrminmax.f90
+do_gable_solve.f90
+dtm_elem_mod.f90
+dtm_p_mass.f90
+elm900rhsd.f90
+eos_mod.f90
+fillcoef800.f90
+fillcoef900.f90
+find_C_int.f90
+findheatgen.f90
+find_melt_zones.f90
+fnv003.f90
+force_balance_setup.f90
+funcbc.f90
+funccf.f90
+func.f90
+funvec.f90
+geometry_mod.f90
+getsepraninfomatr.f90
+getvisdip.f90
+handle_err_netcdf.f90
+icheckinelem.f90
+ielfromgrid.f90
+ieltogrid.f90
+ieulh.f90
+init_eos.f90
+initialize_temp_vel.f90
+inittrac_cart_1_bench4.f90
+inittrac_cart_1.f90
+inittrac_cart_blob.f90
+inittrac_cart.f90
+inittrac_cart_old.f90
+inittrac_cyl.f90
+inittrac.f90
+inittracheat.f90
+instop.f90
+ivalfind1.f90
+ivalfind.f90
+lengzhong.f90
+logcmb.f90
+makecrust_cart.f90
+makecrust_cyl.f90
+makecrust.f90
+mardiv.f90
+movecont.f90
+move_tracers4_cart.f90
+move_tracers4_cyl.f90
+move_tracers4.f90
+mtime_mod.f90
+nusseltP.f90
+39c39
+<    ! write(6,*) 'igradT, isol3: ',igradT,isol3
+---
+>    write(6,*) 'igradT, isol3: ',igradT,isol3
+parallel_mod.f90
+pecophi.f90
+pecopy.f90
+pedetel.f90
+pedeteltrac.f90
+pedeteltrac_subs.f90
+pedtcf.f90
+pefbuoy1.f90
+pefilbuoy.f90
+pefilcof_cyl_old.f90
+pefilcof.f90
+pefilxy.f90
+pefvis.f90
+pel3003.f90
+pemultphivisc.f90
+peplotit.f90
+petrac_mod.f90
+pevrms.f90
+phifromgrad.f90
+plafp6.f90
+predcoort.f90
+prepare_ystretch.f90
+print_final_eos.f90
+pvk_allocate.f90
+ramp.f90
+ran0.f90
+readbs_netcdf.f90
+read_namelist_input.f90
+readtrac.f90
+readtrac_netcdf.f90
+remarker.f90
+second.f90
+sepgetinfo.f90
+sepran_arrays_mod.f90
+sepran_interface_mod.f90
+sepreplmethod.f90
+set_up_chempost_logs.f90
+set_up_eos.f90
+setup_temperature_bc.f90
+set_up_tracers.f90
+sol2vtu.f90
+sper01_mod.f90
+steady_heatP.f90
+steady_iteration.f90
+stokesP.f90
+16,17c16,17
+< integer :: ipuser=0,ip=0,ipbuoy2=0,iread=0,ndim=2,npoint=0,iprint_solution=-1,ihelp=0
+< integer :: num_build=0,num_solve=0,build_in(20)=0,solve_in(20)=0,iout=0,ielhlp=0,isubiter=0
+---
+> integer :: ipuser,ip,ipbuoy2,iread,ndim,npoint,iprint_solution=-1,ihelp=0
+> integer :: num_build=0,num_solve=0,build_in(20),solve_in(20),iout,ielhlp=0,isubiter
+stokesP_new.f90
+20,21c20,21
+< integer :: ipuser=0,ip=0,ipbuoy2=0,iread=0,ndim=2,npoint=0,iprint_solution=-1,iplate=0,jplate=0
+< integer :: num_build=0,num_solve=0,build_in(20)=0,solve_in(20)=0,iout=0,ielhlp=0,sinvec(10)=0
+---
+> integer :: ipuser,ip,ipbuoy2,iread,ndim,npoint,iprint_solution=-1,iplate,jplate
+> integer :: num_build=0,num_solve=0,build_in(20),solve_in(20),iout,ielhlp,sinvec(10)
+23c23
+< real(kind=8) :: solve_rin(20)=0,vrms,rmax,rhmax,rsinvec(10)=0,teststress,strchain_integrate
+---
+> real(kind=8) :: solve_rin(20),vrms,rmax,rhmax,rsinvec(10),teststress,strchain_integrate
+55,58c55,56
+< ! Test 042924. Code fails in sepprofile on a segfault on second iteration. Maybe decomposition is not stored correctly
+< ! Build every step now for imatrix9=1 or imatrix9=2
+<  if (first.or.itypv>1.or.imatrix9<3) then
+<      if (pedebug.and.print_node) write(irefwr,*) 'Stokes: build A and f',gable_stokes_choice,itypv
+---
+> if (first.or.itypv>1) then
+> !    if (pedebug.and.print_node) write(irefwr,*) 'Stokes: build A and f',gable_stokes_choice,itypv
+64,65c62,63
+<  else 
+<      if (pedebug.and.print_node) write(irefwr,*) 'Stokes: build just f',gable_stokes_choice,itypv
+---
+> else 
+> !    if (pedebug.and.print_node) write(irefwr,*) 'Stokes: build just f',gable_stokes_choice,itypv
+70c68
+<  endif
+---
+> endif
+179d176
+< !write(6,'(''solvel with solve_in: '',20i10)') solve_in(1:20)
+stress_chain_subs.f90
+subtract_average_rotation.f90
+surfacevel.f90
+temptogrid.f90
+test_tracer_accuracy.f90
+time_integration.f90
+time_int_output.f90
+toGMT.f90
+tracdens.f90
+tracdens_subs.f90
+tracerout.f90
+tracerout_netcdf.f90
+tracers_mod.f90
+tracrhsd.f90
+tracrhsd_subs.f90
+tracvel.f90
+trap_allocate.f90
+trilin.f90
+update_rho.f90
+use_tracers_from_cian_or_nate.f90
+velintmark_cart.f90
+velintmark_cyl.f90
+velocity_bc.f90
+vrms_r_theta.f90
+writbs_netcdf.f90
+12c12
+< integer :: i,dimids(2),length_file_name
+---
+> integer :: i,dimids(2)
+18,19c18
+< character(len=80) :: fname2,fname_in
+< 
+---
+> character(len=80) :: fname2
+28,30c27
+< fname_in=fname(1:80)
+< length_file_name=len_trim(fname_in)
+< fname2=fname_in(1:length_file_name)
+---
+> fname2=fname(1:len_trim(fname))

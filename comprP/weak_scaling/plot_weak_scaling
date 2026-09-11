@@ -1,0 +1,14 @@
+#/bin/bash
+file=weak_scaling
+region=0.1/20.9/0/2000
+scale=X10c
+psbasemap -J$scale -R$region -K -Ba4:"# cores":/a100:"wall clock time (s)":WSne > $file.eps
+psxy -J -R -K -O -Sc0.2 -W1,grey -Glightred  gnu >> $file.eps
+psxy -J -R -K -O -Sc0.2 -W1,grey -Glightblue intel >> $file.eps
+
+psxy -J -R -K -O -St0.2 -W1 -Gred  gnu_gold >> $file.eps
+psxy -J -R -K -O -St0.2 -W1 -Gblue intel_gold >> $file.eps
+
+echo "showpage" >> $file.eps
+ps2pdf $file.eps
+xpdf $file.pdf

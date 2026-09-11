@@ -1,0 +1,10 @@
+sepmesh sepmesh.in
+cp comprP.nml comprP_copy.nml
+for Ra in 5e4 1e5 2e5
+do
+  cp comprP_"$Ra".nml comprP.nml
+  comprP < comprP.in > comprP_"$Ra".out
+  cp T_restart.nf T_start.nf
+  tail -n 1 comprP_"$Ra".out
+done
+cp comprP_copy.nml comprP.nml

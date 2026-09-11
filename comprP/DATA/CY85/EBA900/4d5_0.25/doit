@@ -1,0 +1,33 @@
+#!/bin/bash
+for i in 0 1 2 3
+do
+   echo comprP_P0."$i"
+   cp comprP_P0."$i".nml comprP.nml
+   comprP < comprP.in > comprP_P0."$i".out
+   cp T_restart.nf T_start.nf
+   cp GMT/AVG_T.0001 GMT/AVG_T_P0."$i"
+done
+
+cp comprP_P0.0.nml comprP.nml
+comprP < comprP.in > comprP_P0.0.out
+for i in -1 -2 -3 -4
+do
+   cp T_restart.nf T_start.nf
+   let j=-$i
+   echo comprP_P-0."$j"
+   cp comprP_P-0."$j".nml comprP.nml
+   comprP < comprP.in > comprP_P-0."$j".out
+   cp GMT/AVG_T.0001 GMT/AVG_T_P-0."$j"
+done
+
+for i in -4 -3 -2 -1 
+do
+   let j=-$i
+   tail -n 1 comprP_P-0."$j".out
+done
+
+for i in 0 1 2 3
+do
+   tail -n 1 comprP_P0."$i".out
+done
+

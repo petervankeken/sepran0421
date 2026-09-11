@@ -1,0 +1,20 @@
+rm -f stokes_Ra
+rm -f *.vtu *.pvtu
+rm -f sepplot.*
+make
+
+sepmesh sepmesh_quad_par.in
+cp petscrc_par petscrc
+
+echo "&dtm_elem_nml" > dtm_elem.nml
+echo "dtm_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "dtm_only_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "print_matrix=.false." >> dtm_elem.nml
+echo "do_solve=.true." >> dtm_elem.nml
+echo "/" >> dtm_elem.nml
+
+sepmpi comprP  comprP.in 
+
+if [ "$USER" == "pvankeken" ]; then
+   scp *.vtu *.pvtu pvankeken.dtm.ciw.edu:Desktop/quad
+fi

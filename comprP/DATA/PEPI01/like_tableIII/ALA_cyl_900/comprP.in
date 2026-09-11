@@ -1,0 +1,34 @@
+problem
+types
+  elgrp1=(type=900)
+essboundcond
+  degfd1=curves0(c45)   # free slip right boundary
+  points(p1)   # make sure cornerpoints have (u,v)=(0,0)
+  points(p5)
+  points(p6)
+  points(p10)
+localtransform
+  degfd1,degfd2=curves0(c45)
+
+problem 2
+  types
+    elgrp1=(type=800)
+  essboundcond
+    curves0(c40)   # top
+    curves0(c41)   # bottom
+end
+
+matrix
+  problem=1 storage_scheme = profile
+  problem=2 storage_scheme = compact
+end
+
+essential boundary conditions problem=1
+end
+essential boundary conditions problem=2
+  degfd1,curves0(c41),value=1
+end
+
+output
+  write 1 solutions
+end

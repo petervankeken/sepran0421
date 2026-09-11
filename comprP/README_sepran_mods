@@ -1,0 +1,2 @@
+sepmumpsbody.f90: make sure MUMPS.INFO isn't used
+to0092.f90 : make sure sepcomp.out is not used with mpi_partrac

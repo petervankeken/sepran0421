@@ -1,0 +1,70 @@
+problem
+types
+  elgrp1=(type=900,41)
+essboundcond
+  degfd1=curves0(c41)
+  degfd1=curves0(c40)
+  degfd2=curves0(c40)
+  points(p1)
+localtransform
+  degfd1,degfd2=curves0(c41)
+  degfd1,degfd2=curves0(c40)
+problem 2
+  types
+    elgrp1=(type=800)
+  essboundcond
+    curves0(c41)
+    curves0(c40)
+end
+
+matrix
+  problem=1 storage_scheme = mumps symmetric positive_definite
+  problem=2 storage_scheme = compact
+end
+
+essential boundary conditions problem=1
+* degfd1,curves0(c3),value=10
+end
+essential boundary conditions problem=2
+  degfd1,curves0(c100),value=1
+end
+
+output
+  write 1 solutions
+end
+
+output
+  write 1 solutions
+end
+                                                                                                                                                            
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end
+create
+end                                                                                                                                                            
+

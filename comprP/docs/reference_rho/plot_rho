@@ -1,0 +1,23 @@
+region=3100/6000/0/2885
+scale=X10c/-10c
+file=rho_WA_BvK13
+gmtset PAPER_MEDIA=Custom_13cx24.5c
+
+psbasemap -Y1.8c -X2.1c -J$scale -R$region -K -Ba500:"@~r@~ (kg/m@+3@+)":/a200:"z (km)":WSne > $file.eps
+cat rho.WA | awk '{print $2, $1}' | psxy -W2,red -J -R -K -O >> $file.eps
+cat rho.WA | awk '{print $3, $1}' | psxy -W2,blue -J -R -K -O >> $file.eps
+cat rho.WA | awk '{print $4, $1}' | psxy -W2 -J -R -K -O >> $file.eps
+cat PREM.rho | awk '{print $2*1000, $1}' | psxy -W5,grey -J -R -K -O >> $file.eps
+echo "3150 2800 11 0 0 LM a)" | pstext -J -K -O -R >> $file.eps
+
+psbasemap -X10c -J$scale -R$region -K -O -Ba500:"@~r@~ (kg/m@+3@+)":/a200:"z (km)":wSnE >> $file.eps
+
+cat rho.BvK13 | awk '{print $2, $1}' | psxy -W2,red -J -R -K -O >> $file.eps
+cat rho.BvK13 | awk '{print $3, $1}' | psxy -W2,blue -J -R -K -O >> $file.eps
+cat rho.BvK13 | awk '{print $4, $1}' | psxy -W2 -J -R -K -O >> $file.eps
+cat PREM.rho | awk '{print $2*1000, $1}' | psxy -W5,grey -J -R -K -O >> $file.eps
+echo "3150 2800 11 0 0 LM b)" | pstext -J -K -O -R >> $file.eps
+
+echo "showpage" >> $file.eps
+ps2pdf $file.eps
+xpdf $file.pdf

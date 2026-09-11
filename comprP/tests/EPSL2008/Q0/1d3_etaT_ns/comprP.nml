@@ -1,0 +1,71 @@
+&comprP_nml
+Ra=1e3   ! Rayleigh number
+Di=0.0
+Rb_local=0e0
+Delta1K=F
+stokes_via_user=T
+!stokes_only=T
+
+cyl = .true.  ! cylindrical geometry
+subtract_rotation=T ! make sure to remove the null space (rigid rotation)
+
+steady=T ! 0=time-dependent computation
+  nsteady_max=40
+  min_iter_steady=1
+  relax=0.3
+  metupw=0
+  eps=1e-2
+
+isolmethod9=0
+itype_stokes=900
+
+ncor=1    ! number of corrector steps
+   tfac=2.0 ! fraction of CFL criterion. Negative sign indicates we'll use dimensional time at the input
+   dtout_d= 0.01 ! in Byr
+   tmax_d = 4.5  ! in Byr
+   nbetween=2
+
+iclc=0   ! number of curves with local transformations of b.c.
+   icloc= 40, 41    ! curve numbers of those curves
+nbp=1
+   iboundpoints=1
+
+krestart=-1  ! 1000: start from Tstartfile (not UVstartfile); -1 conductive
+Tstartfile='T_start.nf'
+UVstartfile='UV_start.nf'
+output_velocity_solution=.true.
+
+jtypv=3  ! eta=eta(T,p)
+b_eta=6.908
+nlay=3   ! number of layers
+   zint_d= 0.04495,0.2813   ! nlay-1 interface depths   used in viscosity function
+   viscl=1,1,1   ! eta0 in the layers
+
+iiqtype=0 ! compute internal heating as function of BSE
+q_layer_d=0.0,0,0 ! From JP original : very large contribution estimated of cooling? 
+
+ibottom=41  ! bottom curve number
+itop=40  ! top curve number
+r1=0.4292 ! inner radius
+r2=1.4292 ! outer radius
+
+ 
+ipmax=800
+
+gable_plates=F
+nplates=8   ! by default, plate boundaries are equally spaced
+  whalf=0.05
+  recomputeG=T
+  istress_curve=43
+
+isolmethod8=-1
+ipetsc8=0
+imatrix8=6 ! 52=mumps CRS asymmetric; 6=sepran CRS asymmetric
+isolmethod9=0
+ipetsc9=2  ! 2=petsc
+imatrix9=53 ! 54=mumps CRS symmetric pos def
+
+iextra_input=2
+
+/
+

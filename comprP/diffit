@@ -1,0 +1,7 @@
+rm difje
+for file in *.f90
+do
+    echo $file >> difje
+    diff $file ../$file >> difje
+done
+more difje

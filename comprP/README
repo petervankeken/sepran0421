@@ -1,0 +1,7 @@
+0619 
+
+062519
+issues with pointers. Build crashes when isol2 is created
+Apparently using start+to0092+commat is not correct. Use sepstr instead
+It is essential to use problem=p in the essential boundary conditions blocks in input
+    otherwise problem type for isol will be overwritten

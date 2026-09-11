@@ -1,0 +1,25 @@
+constants
+  integers
+     NELMX=81
+     NELMY=81
+  reals
+     lambda=1
+end
+
+mesh2d
+   points
+     p1=(0,0)
+     p2=($lambda,0)
+     p3=($lambda,1)
+     p4=(0,1)
+   curves
+     c1=line2(p1,p2,nelm=$NELMX)
+     c2=line2(p2,p3,nelm=$NELMY)
+     c3=line2(p3,p4,nelm=$NELMX)
+     c4=line2(p4,p1,nelm=$NELMY)
+   surfaces
+     s1=rectangle4(c1,c2,c3,c4)
+   plot(jmark=1)
+   renumber best profile
+   # parallel, num_processors=2, method=layers
+end

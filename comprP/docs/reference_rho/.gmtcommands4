@@ -1,0 +1,9 @@
+# GMT common arguments shelf
+-Ba500:@~r@~ (kg/m@+3@+):/a200:z (km):wSnE
+-JX10c/-10c
+-R3100/6000/0/2885
+-X2.1c
+-x10c
+-Y1.8c
+-jX10c/-10c
+EOF

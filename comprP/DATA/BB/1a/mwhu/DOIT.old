@@ -1,0 +1,16 @@
+
+sepmesh sepmesh_quad.in
+#rm -f petscrc
+cp petscrc_par petscrc
+
+echo "&dtm_elem_nml" > dtm_elem.nml
+echo "dtm_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "dtm_only_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "print_matrix=.false." >> dtm_elem.nml
+echo "do_solve=.true." >> dtm_elem.nml
+echo "/" >> dtm_elem.nml
+../comprP < comprP.in
+
+if [ "$USER" == "pvankeken" ]; then
+   scp *.vtu pvankeken.dtm.ciw.edu:Desktop
+fi

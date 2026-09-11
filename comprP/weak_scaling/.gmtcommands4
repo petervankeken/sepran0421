@@ -1,0 +1,7 @@
+# GMT common arguments shelf
+-Ba8:# cores:/a100:wall clock time (s):WSne
+-JX10c
+-R0.1/64.9/0/2000
+-x10c
+-jX10c
+EOF

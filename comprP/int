@@ -1,0 +1,2 @@
+real(kind=8) :: u1lc(3),solve_rin(100)
+integer :: commat_in(14),build_in(10),iu1lc(3),solve_in(14)

@@ -1,0 +1,6 @@
+# GMT common arguments shelf
+-Ba2:nproc:/a0.1:weak scaling:WSne
+-JX10c
+-R0/20/0.95/1.4
+-jX10c
+EOF

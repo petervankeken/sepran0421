@@ -1,0 +1,50 @@
+region=-10/3500/0/1
+scale=X20c/5c
+file=Di_plot
+
+psbasemap -J$scale -K -R$region -Ba1000:"T":/a0.2:"y":WSne  > $file.eps
+cat Tbar.025 | awk '{print $2, $1}' |  psxy -J -R -K -O -W3 >> $file.eps
+cat Tbar.025 | awk '{print $3, $1}' |  psxy -J -R -K -O -W2,red >> $file.eps
+cat Tbar.025 | awk '{print $4, $1}' |  psxy -J -R -K -O -W2,blue >> $file.eps
+psxy -J -R -K -O -W1,- >> $file.eps <<!
+0 0
+0 1
+!
+pstext -J -K -O -R >> $file.eps <<!
+100 0.1 9 0 0 LM Di=0.25 Ts=273 Tbars=1600
+2000 0.8 9 0 0 LM Blue: Tp (perturbation T)
+2000 0.7 9 0 0 LM Red: Tbar (adiabat)
+2000 0.6 9 0 0 LM Black: T (total T)
+2000 0.9 9 0 0 LM T = Tp + Tbar - Tbars + Ts
+!
+
+psbasemap -Y5c -J$scale -K -O -R$region -Ba1000:"T":/a0.2:"y":Wsne  >> $file.eps
+cat Tbar.050 | awk '{print $2, $1}' |  psxy -J -R -K -O -W3 >> $file.eps
+cat Tbar.050 | awk '{print $3, $1}' |  psxy -J -R -K -O -W2,red >> $file.eps
+cat Tbar.050 | awk '{print $4, $1}' |  psxy -J -R -K -O -W2,blue >> $file.eps
+psxy -J -R -K -O -W1,- >> $file.eps <<!
+0 0
+0 1
+!
+pstext -J -K -O -R >> $file.eps <<!
+100 0.1 9 0 0 LM Di=0.5
+!
+
+psbasemap -Y5c -J$scale -K -O -R$region -Ba1000:"T":/a0.2:"y":Wsne  >> $file.eps
+cat Tbar.100 | awk '{print $2, $1}' |  psxy -J -R -K -O -W3 >> $file.eps
+cat Tbar.100 | awk '{print $3, $1}' |  psxy -J -R -K -O -W2,red >> $file.eps
+cat Tbar.100 | awk '{print $4, $1}' |  psxy -J -R -K -O -W2,blue >> $file.eps
+psxy -J -R -K -O -W1,- >> $file.eps <<!
+0 0
+0 1
+!
+pstext -J -K -O -R >> $file.eps <<!
+100 0.1 9 0 0 LM Di=1
+!
+
+
+echo "showpage" >> $file.eps
+
+ps2pdf $file.eps
+xpdf $file.pdf
+

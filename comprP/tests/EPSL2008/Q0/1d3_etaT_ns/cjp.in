@@ -1,0 +1,20 @@
+4                                                    # Selection of specific rheology (CH94 = 3, FK = 4, CH94_lid = 5)
+6.908 0.0 0.0 0.0 0.0                         # Christensen and Hofmann Depth coefficients (b,c,d,s)
+3 1.0                                                     # Surface Boundary (1~standard,2~CH94,3~FB,4~MovingFB)
+0                                                     # If SB=CH94, fix(0) or move(1) plate boundary?
+F F F                                                  # Debug?  strainrate x visc?
+0.05d0 43 T                                           # whalf,istrcurve, Recompute G?
+8 0.0 0.7853975 1.570795 2.3561925 3.14159 3.9269875 4.712385 5.4977825 6.28318
+1                                                     # CHBT
+2 0.0d0                                               # ifreq,clayer
+T                                                     # extract basalt tracers?
+0.0 2000.0 2.0 1.70                                  # Period offset, u_o, pfactor, x_o
+T F                                                   # duplicate? initialize crust?
+T F F                                                 # absolute? ratio? old_rhsd?
+0.9545 1.4247                                              # ymelt(obsolete) base of basalt
+0 0.5 3.8 4.0                                         # old meltzones (cartesian only)
+0.045 0.045 0.2 -4                               # Depth of ingassing, depth of degassing/melting, angular extent, ntheta
+F 0                                              # iweak, modet
+0.4415 0.4303                                    # RCMB1, RCMB2
+F                                                # restartchem
+1e-3 1                                           # eta_star, sigma_y

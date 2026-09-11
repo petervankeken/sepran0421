@@ -1,0 +1,44 @@
+#!/bin/bash
+region=-0.45/0.50/0/600
+scale=X6c/13c
+file=like_fig6
+psbasemap -J$scale -R$region -K -P -Ba0.2:"P":/a100:"<Usf>":wsNE > $file.eps
+psxy -W1,- -K -O -P -R -J >> $file.eps << !
+0 0
+0 600
+!
+
+for Di in 0 0.25 0.5
+do 
+   cd 4d5_"$Di"
+   rm -f U_sf.dat
+   for Pn in  -4 -3 -2 -1
+   do
+      let P=-$Pn
+      Usf=`cat comprP_P-0."$P".out | tail -n 2 | head -n 1 | awk '{print $8}'`
+      echo $Pn $Usf | awk '{print $1*0.1,$2}' >> U_sf.dat
+   done
+   for Pn in  0 1 2 3
+   do
+      let P=$Pn
+      Usf=`cat comprP_P0."$P".out | tail -n 2 | head -n 1 | awk '{print $8}'`
+      echo $Pn $Usf | awk '{print $1*0.1,$2}' >> U_sf.dat
+   done
+   cd ..
+done
+
+psxy 4d5_0/U_sf.dat -W1,red -K -P -R -J  -O >> $file.eps
+psxy 4d5_0/U_sf.dat -Sc0.15 -K -P -R -J -O -W1 -Gwhite >> $file.eps
+
+psxy 4d5_0.25/U_sf.dat -W1,red -K -P -R -J  -O >> $file.eps
+psxy 4d5_0.25/U_sf.dat -Sc0.15 -K -P -R -J -O -W1 -Gwhite >> $file.eps
+
+psxy 4d5_0.5/U_sf.dat -W1,red -K -P -R -J  -O >> $file.eps
+psxy 4d5_0.5/U_sf.dat -Sc0.15 -K -P -R -J -O -W1 -Gwhite >> $file.eps
+
+
+
+echo "showpage" >> $file.eps
+ps2pdf $file.eps
+xpdf $file.pdf
+

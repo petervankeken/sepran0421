@@ -1,0 +1,14 @@
+file=justRK4
+region=0/20/0.95/1.4
+scale=X10c
+psbasemap -J$scale -R$region -K -Ba2:"nproc":/a0.1:"weak scaling":WSne > $file.eps
+psxy justRK4_1600.dat -W1,black  -J -R -K -O  >> $file.eps
+psxy justRK4_1600.dat -Sc0.1 -W1 -Gblack -J -R -K -O  >> $file.eps
+psxy justRK4_12800.dat -W1,blue -J -R -K -O  >> $file.eps
+psxy justRK4_12800.dat -St0.15 -W1 -Gblue -J -R -K -O  >> $file.eps
+
+echo "showpage" >> $file.eps
+ps2pdf $file.eps
+xpdf $file.pdf
+
+

@@ -1,0 +1,14 @@
+> is file in local directory
+< is file in SEPRAN directory
+112,116c112,116
+<       if ( scheme==0 .or. scheme==20 ) then
+<          nested = jmethod==1 .or. jmethod==2 .and. kprobpart%iinputloc(14)==0
+<       else if ( jmethod<=2 ) then
+<          nested = scheme==2 .or. scheme==3
+<       end if  ! ( scheme==0 )
+---
+>   !    if ( scheme==0 .or. scheme==20 ) then
+>   !       nested = jmethod==1 .or. jmethod==2 .and. kprobpart%iinputloc(14)==0
+>   !    else if ( jmethod<=2 ) then
+>   !       nested = scheme==2 .or. scheme==3
+>   !    end if  ! ( scheme==0 )

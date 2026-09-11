@@ -1,0 +1,37 @@
+start
+end
+problem
+  types
+     elgrp1=(type=900)
+  essboundcond
+     degfd2,curves0(c100)
+     degfd2,curves0(c101)
+     degfd1,curves0(c102)
+     degfd1,curves0(c103)
+problem 2
+  types
+    elgrp1=(type=800)
+  essboundcond
+    curves0(c100)
+    curves0(c101)
+end
+
+matrix
+  problem=1 storage_scheme = mumps
+  problem=2 storage_scheme = mumps
+end
+
+essential boundary conditions problem=1
+* degfd1,curves0(c3),value=10
+end
+essential boundary conditions problem=2
+  degfd1,curves0(c100),value=1
+end
+
+output
+  write 1 solutions
+end
+
+output
+  write 1 solutions
+end

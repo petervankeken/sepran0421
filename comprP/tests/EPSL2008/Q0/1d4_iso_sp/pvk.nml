@@ -1,0 +1,6 @@
+$pvk_nl
+
+delta1K=.false. ! we did this long before we use 1K for non-dimensionalization...
+b_eta=6.908
+
+/

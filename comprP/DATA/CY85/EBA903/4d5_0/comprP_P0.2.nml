@@ -1,0 +1,36 @@
+&comprP_nml
+ Ra=4d5 ! Rayleigh number
+ Di=0
+ Rb_local = 0  ! Buoyancy number; negative means tracers are light
+ Ts_eos0=273
+ delta1K=F
+ mcont=0
+
+ ibench_type=3 ! King et al.
+
+ intrule800=0
+
+ metupw=3
+ petest=F
+ krestart=1001
+ delta1K=F
+ isolmethod9=0
+ isolmethod8=0
+ itype_stokes=900
+ ipetsc8=0
+ imatrix8=2
+ ipetsc9=0
+ imatrix9=2
+ steady=T
+    eps=1d-5
+    nsteady_max=200
+    relax=0.2
+ nph=1
+    gamma_d=3.06839e6 ! P=0.2
+    phz0_d=1439e3
+    phdz_d=60e3
+    pht0_d=1500
+    drho_rel=0.182
+  
+    
+/

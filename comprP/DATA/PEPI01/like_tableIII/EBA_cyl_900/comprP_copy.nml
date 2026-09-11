@@ -1,0 +1,54 @@
+&comprP_nml
+ Ra=5d4 ! Rayleigh number
+ Di=0.5
+ Rb_local = 0  ! Buoyancy number; negative means tracers are light
+ mcont=0
+ delta1K=F
+ cyl=T
+
+ jtypv=0
+
+ eos_type=0
+ Ts_eos0=273 ! for PEPI01
+ ialphatype=1 ! PEPI01 & BvK13
+ palpha=-2
+ icondtype=1 ! PEPI01
+ pcond=3
+
+ nres_GMT=160
+ iiqtype=0
+ q_layer_d=0
+
+ !stokes_only=T
+
+ iclc=1
+   icloc=45
+ nbp=4
+   iboundpoints=1,5,6,10
+ ibottom=41 ! bottom curve number
+ itop=40 ! top curve number
+ r1=0.4292 ! inner radius
+ r2=1.4292 ! outer radius
+
+ ibench_type=2 ! 5=JGR97_2; 3=King2010
+ !iadiabat=2
+
+ intrule800=0
+
+ metupw=3
+ petest=F
+ krestart=-1
+ isolmethod9=0
+ isolmethod8=0
+ itype_stokes=900
+ ipetsc8=0
+ imatrix8=2
+ ipetsc9=0
+ imatrix9=54 ! 54=pos dev mumps
+ steady=T
+    eps=1e-4
+    relax=0.5
+    nsteady_max=30
+
+
+/

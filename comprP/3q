@@ -1,0 +1,119 @@
+      subroutine sepbuildold ( iinbldlc, matr, intmatlc, kmeshlc, kproblc, &
+                               irhsdlc,  massmtr, iusol, islold, iuserloc, &
+                               userloc )
+! ======================================================================
+!
+!        programmer    Guus Segal
+!        version  1.0  date 07-03-2020
+!
+!   copyright (c) 2020-2020  "Ingenieursbureau SEPRA"
+!   permission to copy or distribute this software or documentation
+!   in hard copy or soft copy granted only by written license
+!   obtained from "Ingenieursbureau SEPRA".
+!   all rights reserved. no part of this publication may be reproduced,
+!   stored in a retrieval system ( e.g., in memory, disk, or core)
+!   or be transmitted by any means, electronic, mechanical, photocopy,
+!   recording, or otherwise, without written permission from the
+!   publisher.
+! **********************************************************************
+!
+!                       DESCRIPTION
+!
+!
+! **********************************************************************
+!
+!                       KEYWORDS
+!
+! **********************************************************************
+!
+!                       MODULES USED
+!
+      use control
+      use sepmoduleuser
+      use sepmoduleintmat
+      use sepmodulemain
+      use sepmodulesmf
+      implicit none
+!
+! **********************************************************************
+!
+!                       INPUT / OUTPUT PARAMETERS
+!
+      integer, intent(in) :: iinbldlc(*), iusol, islold(*), kproblc, kmeshlc
+      integer, intent(inout) :: irhsdlc(*)
+      integer, target :: intmatlc(*), matr(*), massmtr, iuserloc(*)
+      double precision, target :: userloc(*)
+! **********************************************************************
+!
+!                       LOCAL PARAMETERS
+!
+      integer :: nmat
+! **********************************************************************
+!
+!                       SUBROUTINES CALLED
+!
+!     ERCLOS         Resets old name of previous subroutine of higher level
+!     EROPEN         Produces concatenated name of local subroutine
+! **********************************************************************
+!
+!                       I/O
+!
+! **********************************************************************
+!
+!                       ERROR MESSAGES
+!
+! **********************************************************************
+!
+!                       PSEUDO CODE
+!
+! **********************************************************************
+!
+!                       DATA STATEMENTS
+!
+! ======================================================================
+!
+      call eropen ( 'sepbuildold' )
+      debug = .false. .and. ioutp>=0
+      if ( debug ) then
+
+!     --- Debug information
+
+         write(irefwr,*) 'Debug information from sepbuildold'
+
+      end if  ! ( debug )
+      if ( ierror/=0 ) go to 1000
+      
+      kmesh2d(1) = kmeshlc
+      kmesh => kmesh2d(1)
+      call sepfillkmesh(kmesh)
+      kprob2d(1) = kproblc
+      kprob => kprob2d(1)
+      iuser => iuserloc(1:iuserloc(1))
+      user => userloc(1:nint(userloc(1)))
+
+      intmatar => intmatlc(1:10)
+      intmat => intmatar(1)
+      isubcall = 5
+      if ( iinbldlc(1)<14 ) then
+         nmat = 1
+      else
+         nmat = iinbldlc(14)+1
+      end if  ! ( iinbldlc(1)<14 )
+
+      stiffmat => matr(1:nmat)
+      massmat => massmtr
+      call sepfillsmf ( iinbldlc, irhsdlc, iusol, islold )
+      write(6,*) 'before sepbuild: ',get_resmem()
+      call sepbuild
+      write(6,*) 'after  sepbuild: ',get_resmem()
+
+1000  if ( debug ) then
+
+!     --- Debug information
+
+         write(irefwr,*) 'End sepbuildold'
+
+      end if  ! ( debug )
+      call erclos ( 'sepbuildold' )
+
+      end subroutine sepbuildold

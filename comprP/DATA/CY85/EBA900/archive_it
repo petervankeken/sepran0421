@@ -1,0 +1,14 @@
+mkdir -p ~/sepran/sepran1020/comprP/DATA/CY85/EBA900
+mkdir -p ~/sepran/sepran1020/comprP/DATA/CY85/EBA900/4d5_0
+mkdir -p ~/sepran/sepran1020/comprP/DATA/CY85/EBA900/4d5_0.25
+mkdir -p ~/sepran/sepran1020/comprP/DATA/CY85/EBA900/4d5_0.5
+target_dir=~/sepran/sepran1020/comprP/DATA/CY85/EBA900
+cp * $target_dir
+for Di in 0 0.25 0.5
+do
+   cp 4d5_"$Di"/*.nml $target_dir/4d5_"$Di"
+   cp 4d5_"$Di"/*.in $target_dir/4d5_"$Di"
+   cp 4d5_"$Di"/*.out $target_dir/4d5_"$Di"
+   cp 4d5_"$Di"/doit  $target_dir/4d5_"$Di"
+done
+

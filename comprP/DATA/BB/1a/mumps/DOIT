@@ -1,0 +1,22 @@
+rm -f comprP.diagnostics
+sepmesh sepmesh_quad.in > sepmesh_quad.out
+#rm -f petscrc
+cp petscrc_par petscrc
+
+echo "&dtm_elem_nml" > dtm_elem.nml
+echo "dtm_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "dtm_only_pressure_mass_matrix=.false." >> dtm_elem.nml
+echo "print_matrix=.false." >> dtm_elem.nml
+echo "do_solve=.true." >> dtm_elem.nml
+echo "/" >> dtm_elem.nml
+nohup comprP < comprP.in > comprP.out 2> /dev/null
+
+diff comprP.diagnostics diagnostics > diffje
+if [ `cat diffje | wc -l` -ne 0 ]; then
+   cat diffje
+   exit 1
+fi
+
+#if [ "$USER" == "pvankeken" ]; then
+#   scp *.vtu pvankeken.dtm.ciw.edu:Desktop
+#fi

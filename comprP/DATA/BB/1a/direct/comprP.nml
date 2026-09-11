@@ -1,0 +1,14 @@
+&comprP_nml
+steady=.true.
+krestart=-1
+Ra=1e4
+eps=1e-4
+nsteady_max=30
+
+delta1K=F
+
+ipetsc8=0
+imatrix8=2
+ipetsc9=0
+imatrix9=1
+/
