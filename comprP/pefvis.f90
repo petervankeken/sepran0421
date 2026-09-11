@@ -24,7 +24,7 @@ real(kind=8) :: z,E,V,t0,z0,A,A0,etanon,etalayer,etatemp,dr_smooth,r_smooth,smoo
 real(kind=8) :: beta,secsqr,pow,radius,realtemp,y1,r
 real(kind=8),parameter :: A_LZ=13.8155_8/3500.0_8  ! from Leng&Zhong, 2010 (page 210)
 integer ::  ifirst,ivalfind,icounter
-logical :: printvis=.false.
+!logical :: printvis=.false.
 data ifirst,icounter/0,0/
 save ifirst,icounter
 

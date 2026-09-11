@@ -14,7 +14,7 @@ use coeff
 implicit none
 integer :: kmesh1(*),kprob1(*),isol1(*),iphi(*)
 integer :: igradv(5),idivv(5),istress(5),iuser(100),iinder(200)
-real(kind=8) :: anorm,volint,penalty_parameter,pressure,user(100)
+real(kind=8) :: anorm,volint,pressure,user(100)
 real(kind=8) :: gradv11,gradv12,gradv22,div11,stress11,stress12,stress22
 integer :: ihelp,nparm,iwork(4,100),i
 real(kind=8) :: work(100)
