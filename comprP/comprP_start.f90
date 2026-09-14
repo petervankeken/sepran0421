@@ -358,16 +358,16 @@ Rb1=Rb
 !write(6,*) 'Rb1   : ',Rb1(1:2)
 
 if (compress) then
-   if (print_node) write(irefwr,*) 'call update_rho'
+   if (print_node) write(irefwr,*) 'call update_rho_adia'
    if (ibench_type==8) then
 !     Leng and Zhong 2010
-      call update_rho(-1)
+      call update_rho_adia(-1)
    else
 !     *** update reference density and adiabat if necessary
       if (eos_ph_latent_heat) then
-         call update_rho(2)
+         call update_rho_adia(2)
       else
-         call update_rho(1)
+         call update_rho_adia(1)
       endif
    endif
 endif
