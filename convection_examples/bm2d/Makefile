@@ -21,7 +21,7 @@ $(OBJS) : %.o : %.f90
 $(PROGRAM) : $(OBJS)
 	ccompile csecond.c
 	seplink $(PROGRAM)
-	cp $(PROGRAM) $(BINDIR)/bm2d
+	cp $(PROGRAM) $(SEPBINDIR)/bm2d
 
 # Main program depends on all modules
 $(PRG_OBJ) : $(MOD_OBJS)

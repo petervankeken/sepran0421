@@ -209,7 +209,7 @@ do
         endif
         if (itracoption>=1) then
            call cpu_time(timeB)
-           call move_tracers4(2,isolold1,isol1,tstepp,tfac)
+           call move_tracers4(2,isolold1(1),isol1,tstepp,tfac)
            !write(irefwr,*) 'done with correcting tracers'
            call cpu_time(timeA)
            cpu_tracers=cpu_tracers+timeA-timeB

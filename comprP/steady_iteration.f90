@@ -35,7 +35,7 @@ call cpu_time(t00)
 do
    call cpu_time(t0)
    niter=niter+1
-   call copyvc(isol1,isolold1)
+   call copyvc(isol1,isolold1(1))
    call copyvc(isol2,isolold2)
    call steady_heatP()
 !  call bmout()

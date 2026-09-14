@@ -1,7 +1,7 @@
 module tracers
   implicit none
   integer, parameter :: NDISTMAX=100
-  logical :: chemwithrho
+  logical :: chemwithrho,stop_after_setup_tracers=.false.
   real(kind=8) :: x0tr(NDISTMAX),x1tr(NDISTMAX),y0tr(NDISTMAX)
   real(kind=8) :: y1tr(NDISTMAX),dr,ainittr(NDISTMAX)
   real(kind=8) :: volume_dist(NDISTMAX),volume_per_tracer(NDISTMAX)

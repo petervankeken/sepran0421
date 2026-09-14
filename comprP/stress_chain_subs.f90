@@ -259,7 +259,7 @@ real(kind=8) :: xm,ym,xn(6),yn(6),un(6),vn(6),done
 real(kind=8) :: tau,theta,btten(3)
 real(kind=8) :: tn(6),temp,visc,pefvis,rdum
 real(kind=8) :: viscmax,viscmin
-integer :: idudy(5),idvdx(5),idudx(5),idvdy(5)
+integer :: idudy,idvdx,idudx,idvdy
 integer :: ihelp,iuser(*),iinmap(1),map(5),iba
 
 ! For getting the stress at the boundary point

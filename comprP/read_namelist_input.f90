@@ -19,33 +19,83 @@ real(kind=8) :: dr_min
 namelist /comprP_nml/ axi,cyl,steady,nsteady_max,eps,jtypv, &
      & Ra,Rb_local,Di,deltaT_dim,delta1K,Kequivalent,Ts_eos0, T0_dim, &
      & ipetsc8,imatrix8, ipetsc9,imatrix9,isolmethod8,isolmethod9, &
-     & nlay,zint_d,q_layer_d,iiqtype,krestart,itop,ibottom,Tstartfile,UVstartfile,tmax_d,tfac,dtout_d,nitermax,printmatrix, &
+     & nlay,zint_d,q_layer_d,iiqtype,krestart,itop,ibottom,isideboundary,Tstartfile,UVstartfile,tmax_d,tfac,dtout_d, &
+     & nitermax,printmatrix, &
      & nbetween,ncor,mcont,itypv,viscl,R1,R2,iclc,icloc,nbp,iboundpoints,ipmax, &
      & pedebug,petiming,intrule800,intrule900,interpol900,interpol800,output_velocity_solution,itype_stokes, &
      & isolmethod8,maxiter8,iprint8,ireler8,cgeps8,ksp_abs8,ksp_rel8,ipreco8, & 
      & isolmethod9,maxiter9,iprint9,ireler9,cgeps9,ksp_abs9,ksp_rel9,ipreco9,time_is_nondimensional,metupw,iextra_input, & 
-     & relax,wavel_perturb,half,quart,eighth,nr_output,nth_output,subtract_rotation, &
+     & relax,relaxtosi,wavel_perturb,half,quart,eighth,nr_output,nth_output,subtract_rotation, &
      & gable_plates,nplates,whalf,recomputeG,istress_curve,min_iter_steady,stokes_via_user,b_eta,c_eta,subdivide800,subdivide900, &
      & petest, tracerC, fieldC, duplicate_tracers, zmelt, xmelt, d_cmb, track_cmb_ingas, initialize_crust, &
-     & itracoption,ndist,kfollowchem,dr,dr_min,npix_radial,x0tr,x1tr,y0tr,y1tr,ainittr,check_on_curved_elements, &
+     & itracoption,stop_after_setup_tracers,ndist,kfollowchem,dr,dr_min,npix_radial,x0tr,x1tr,y0tr,y1tr,ainittr, &
+     & check_on_curved_elements, &
      & predict_with_RK4,T_bot,gable_output_choice,ibench_type,iadiabat,divufromeos,eos_type,TALA,stokes_only,do_not_do_Stokes, & 
-     & drho_background_dense,step_rho_background,T_buoyancy_through_particles,fake_rho_bar,no_temperature_solution, & 
-     & ichoice_init_temp, &
+     & drho_background_dense,step_rho_background,T_buoyancy_through_particles,fake_rho_bar, & 
+     & no_temperature_solution,ichoice_init_temp, &
      & pvk_buoy_special,compute_curl_v,exp_rho_background,stretch_tracers,tstartp,use_tracers_from_nate,ntracers_from_nate, &
      & nochain,ainit,y0m,bilinearC,ratio_method,truncateC,t_init_limit_max,dt_init_limit,use_tracers_from_cian,ntracers_from_cian, &
      & start_from_steady,nres_GMT,ialphatype,palpha,icondtype,pcond,ivl_smoothstep,old_gable_plates,cartplume,kwave_perturb, &
      & deltah_dim, ampini_perturb,insulbot,ala_subiter,eps_ala_subiter,N_ala_subiter_max, &
      & nph,gamma_d,phz0_d,phdz_d,pht0_d,drho_ph_d,ignore_latent_heat,do_rhoprime,subtract_bigGamma_norm,solve_for_Tperturb, &
      & debugTbars,cian_notation,RaT,Ts_dimK,Tbars_dimK,drho_rel,dCY85,use_effective_alpha_Hr,use_varRa,Rat_max,no_mumps_info, &
-     & mpi_partrac,mpi_parallel,weak_scaling_test,tosi15,tosi15_case
+     & chiTisinvrhobar,CY85_Eq22,add_dynamic_pressure_term_to_work,arbitrary_p_scale,update_phase_rho_via_gradient, &
+     & update_phase_rho,update_phase_Tbar,update_phase_Tbar_via_gradient, &
+     & Rb1isRb,rhobar_times_bigGamma,Tbariszero,compute_work_Tprime, &
+     & strawblob,xc_blob,yc_blob,width_blob,amplitude_blob,cian_ALA,altNu,single_Stokes,add_wT_Nu,HoLiu87,add_phi_Nu, & 
+     & add_wT_Nu_quad,netcdf,&
+     & add_phi_Nu_quad,add_P_to_Nu,pressure_test,krad,krad_choice,penalty_parameter,tosi15,tosi15_case,cpisnotcv,addptermtowork, &
+     & sigma_y,eta_star,stokes_sub_iter,eps_stokes_sub_iter,nmax_stokes_sub_iter,file_extrainput,weak_zones,wz_reduce_Ra, & 
+     & eta_wz,eta_plate,printvis,stop_after_initialize_temp_vel,stop_after_first_real_Stokes
 
 
 ! this is called before sepran starts
-tosi15=.false.
-weak_scaling_test=.false.
-mpi_partrac=.false.
-mpi_parallel=.false.
+stop_after_initialize_temp_vel=.false.
+stop_after_first_real_Stokes=.false.
+printvis=.false.
+eta_wz=1.0_8
+eta_plate=1.0_8
+itop=3
+ibottom=1
+isideboundary=2
+weak_zones=.false.
+wz_reduce_Ra=.false.
+stokes_sub_iter=.false.
+eps_stokes_sub_iter=1e-2
+nmax_stokes_sub_iter=30
+eps_ala_subiter=1e-6
+N_ala_subiter_max=100
+addptermtowork=.false.
+cpisnotcv=.false.
+penalty_parameter=1e-6
+krad_choice=0 ! choices for adding radiative effect to computation of conductivity
+krad=.false.
+!altNu=.true.  ! use HoLiu et al. 1987 flux computation in top row
+HoLiu87=.true.
+add_wT_Nu=.true.
+add_wT_Nu_quad=.false.
+add_P_to_Nu=.true.
+cian_ALA=.false.
+compute_work_Tprime=.false.
+Tbariszero=.false.
+xc_blob=0.5_8
+yc_blob=0.8_8
+width_blob=0.05_8
+amplitude_blob=1.0_8
+strawblob=.false.
+rhobar_times_bigGamma=.false. ! ignore old definition to be compatible with Cian (May/June 2021)
+add_dynamic_pressure_term_to_work=.false.
+Rb1isRb=.false.
+arbitrary_p_scale=1.0_8
+chiTisinvrhobar=.false.
+CY85_Eq22=.true.
+update_phase_rho_via_gradient=.true.
+update_phase_rho=.false.
+update_phase_Tbar_via_gradient=.false.
+update_phase_Tbar=.false.
+
 no_mumps_info=.true. ! avoid writing mumps output to mumps.info
+netcdf=.true.
 use_varRa=.false.
 Rat_max=1e10
 use_effective_alpha_Hr=.false.
@@ -121,9 +171,10 @@ istress_curve=43
 subtract_rotation=.false.
 wavel_perturb=-1 ! makes default wavelength twice the size of the box
 relax=0.0_8
+relaxtosi=0.0_8
 iextra_input=0 ! assume no input beyond comprP.in / comprP.nml
 file_extrainput='pvk.nml'
-itype_stokes=903
+itype_stokes=900
 metupw=0
 iclc=4
 icloc(1:4)=(/1,2,3,4/)
@@ -179,8 +230,8 @@ eps=1.0e-4_8
 Ra=1.0e4_8
 ipetsc8=0 ! do not use petsc
 ipetsc9=0 ! do not use petsc
-imatrix8=6 ! compact matrix
-imatrix9=6 ! compact matrix
+imatrix8=2 ! compact matrix
+imatrix9=1 ! compact matrix
 q_layer=0 ! no internal heating
 krestart=0
 UVstartfile='UV_start.nf'
@@ -196,6 +247,7 @@ nitermax=10000
 itracoption=0
 fieldC=.false.
 tracerC=.false.
+stop_after_setup_tracers=.false.
 
 ! geometry
 itop=3
@@ -218,7 +270,28 @@ icoor800=0
 intrule800=0
 compress=.false.
 
+nph=0
+
 read(lu_nml,NML=comprP_nml)
+if (cian_ALA.and.CY85_Eq22) then
+   write(6,*) 'PERROR(read_namelist): cian_ALA and CY85_Eq22 cannot both be true'
+   stop
+endif
+if (stokes_sub_iter) then
+   write(6,*) 'PERROR(read_namelist): stokes_sub_iter needs to be implemented here'
+   stop
+endif
+
+if (strawblob) then
+   ! make sure to update rhobar and Tbar
+   update_phase_rho=.true.
+   !not yet
+   !update_phase_Tbar=.true.
+endif
+
+if (cyl) then
+   altNu=.false. ! HoLiu et al. 1987 flux method only works in Cartesian for now.
+endif
 
 if (nint(Ts_dimK).ne.273) then
    write(6,*) 'PERROR(read_namelist): use Ts_dimK=273 throughout. If you wish to emulate CY85 Ts=1500 or similar'
@@ -415,6 +488,8 @@ if (print_node) write(irefwr,911) (r_zint(i),i=1,nlay-1)
 if (print_node) write(irefwr,1115) Di,Grueneisen,deltaT_dim_pot,nph
 
 if (myid==1) write(irefwr,*) 'myid1: Ra,Rb_local=',Ra,Rb_local
+
+if (Rb_local<1e-5) CY85_Eq22=.false.
 
 
 920   format('iqtype ................................... ',i10,/, 'Multiply heatproduction with rho(z)? ..... ',L10,/, &

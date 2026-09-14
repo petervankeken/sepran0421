@@ -317,7 +317,7 @@ if (compress) then
         eos_rho(i) = eos_rho_d(i)/rho_dim
         if (ibench_type==4) then
            z=eos_z_d(i)/height_dim
-           eos_rho(i) = funccf(3,0.0,1.0-z,z)
+           eos_rho(i) = funccf(3,dzero,1.0_8-z,z)
         endif
      enddo
      eos_T=0.0_8 ! force adiabatic / reference Tbar to 0

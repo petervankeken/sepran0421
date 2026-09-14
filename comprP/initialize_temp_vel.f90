@@ -72,7 +72,7 @@ if (irestart < 0) then
        iprob_here=2  ! second problem is temperature
        ichvc=1  ! type of solution vector
        iu1lc(1)=12  ! set dof 1 to func(12,x,y,z)
-       call creavc(0,ichvc+(iprob_here-1)*1000,idum,isol2,kmesh1,kprob1,iu1lc,u1lc)
+       call creavc(0,ichvc+(iprob_here-1)*1000,idum,isol2,kmesh1,kprob1,iu1lc,u1lc,iu1lc,u1lc)
      endif
      stokes_is_updated=.false.
      if (print_node) then
@@ -87,7 +87,7 @@ if (irestart < 0) then
      iprob_here=2  ! second problem is temperature
      ichvc=1  ! type of solution vector
      iu1lc(1)=1  ! set dof 1 to func(2,x,y,z)
-     call creavc(0,ichvc+(iprob_here-1)*1000,idum,ipert,kmesh1,kprob1,iu1lc,u1lc)
+     call creavc(0,ichvc+(iprob_here-1)*1000,idum,ipert,kmesh1,kprob1,iu1lc,u1lc,iu1lc,u1lc)
      if (print_node) then
         call algebr(6,1,ipert,i1,i1,kmesh1,kprob1,tmin_pert,tmax_pert,p,q,ipoint)
         write(irefwr,*) 'ipert: ',tmin_pert,tmax_pert
@@ -209,7 +209,7 @@ if (.not.insulbot) then
 endif
 call bvalue(0,1002,kmesh1,kprob1,isol2,T_top,itop,itop,1,0)
 
-call copyvc(isol1,isolold1)
+call copyvc(isol1,isolold1(1))
 call copyvc(isol1,isolold1(2))
 call copyvc(isol1,isolold1(3))
 call copyvc(isol2,isolold2)
@@ -277,7 +277,7 @@ endif
 
 
 
-call copyvc(isol1,isolold1)
+call copyvc(isol1,isolold1(1))
 call copyvc(isol1,isolold1(2))
 call copyvc(isol1,isolold1(3))
 call copyvc(isol2,isolold2)

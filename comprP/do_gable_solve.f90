@@ -348,17 +348,17 @@ rinvec(1)=4.0_8 ! signal option=4 to funvec
 !     v,ign(1,igchoice),kmesh1,kprob1)
 
 ! manvec still expects a 5xiinvec(5) array
-plate_soll(1,1:8) = plate_sol(1:8)
+!plate_soll(1,1:8) = plate_sol(1:8)
 
 ! plate 1
 icom = 1
 ipl = 1
 !write(irefwr,*) 'jlimit1'
-call manvec(iinvec,rinvec,plate_sol,plate_sol,irotation,kmesh1,kprob1)
+call manvec(iinvec,rinvec,plate_sol(1),plate_sol(1),irotation,kmesh1,kprob1)
 
 iinvec(3) = 2
 icom = 2
 !write(irefwr,*) 'jlimit2'
-call manvec(iinvec,rinvec,plate_sol,plate_sol,irotation,kmesh1,kprob1)
+call manvec(iinvec,rinvec,plate_sol(1),plate_sol(1),irotation,kmesh1,kprob1)
 end subroutine jlimit
 

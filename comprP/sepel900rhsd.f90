@@ -44,9 +44,10 @@
 !
 !                       LOCAL PARAMETERS
 !
-      integer :: i, iseq, kdiag
+      integer :: i, iseq, kdiag, j=0
       double precision :: rhoc(m), work(m)
       double precision, pointer :: vec(:), phi(:,:)
+      save j
 
 !     i              Counting variable
 !     iseq           Sequence number
@@ -83,6 +84,8 @@
 !
 ! ======================================================================
 !
+      j=j+1
+      write(6,*) 'sepelrhsd900: ',j
       call eropen ( 'sepel900rhsd' )
       debug = .false. .and. ioutp>=0
       if ( debug ) then
@@ -112,7 +115,7 @@
       do i = 0, E%ndim-1
 
          iseq = E%indsource+i
-
+         ! write(6,*) 'iseq: ',iseq,E%ind(iseq)
          if ( E%ind(iseq)/=0 ) then
 
 !        --- f1 # 0  store contribution temporary in array work

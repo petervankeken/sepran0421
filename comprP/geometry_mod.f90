@@ -5,6 +5,7 @@ real(kind=8) :: T_top,T_bot
 real(kind=8) :: volume,surf(10),wavel_perturb,surfbot,surftop
 integer :: ibottom,itop,imid,nbp,iboundpoints(10),icloc(10),iclc,ntheta
 logical :: cyl,axi,half,quart,periodic,full,insulbot,eighth
+integer :: isideboundary
 
 ! pexcyc.inc
 integer, parameter :: NXCYCMAX=10000

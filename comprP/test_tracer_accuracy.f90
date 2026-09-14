@@ -62,7 +62,7 @@ if (itracoption /= 0) then
      ndist2 = ndist
      ntrac2 = ntrac(1)
      itracoption2=itracoption
-     call copyvc(isol1,isolold1)
+     call copyvc(isol1,isolold1(1))
 
      if (.not.mpi_partrac) then
 !       Actual test as intended
@@ -95,7 +95,7 @@ if (itracoption /= 0) then
         tracer(1)%x=xp
         tracer(1)%y=yp
       endif
-      call detelemtrac(1,user_here,'compr_start')
+      call detelemtrac(1,'compr_start')
  
 !     Synthetic velocity; create velocity vector
 !     Total number of entries
@@ -164,7 +164,7 @@ if (itracoption /= 0) then
       ndist = ndist2
       ntrac(1) = ntrac2
       itracoption=itracoption2
-      call copyvc(isolold1,isol1)
+      call copyvc(isolold1(1),isol1)
       if (tracer(1)%y*10000 == rlampix*10000) then
          if (print_node) write(irefwr,*) 'reset problem'
          call instop
