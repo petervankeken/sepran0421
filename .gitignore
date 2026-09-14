@@ -1,5 +1,5 @@
-comprP
-comprN
+comprP/comprP
+comprN/comprN
 *.o
 sepplot.*
 sepposc.*
