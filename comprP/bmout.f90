@@ -22,9 +22,14 @@ real(kind=8) :: pee,quu,f_cyl,vrmsa(4),pressure_max,curlv_max,tempph
 character(len=120) :: namedof(4)
 integer :: ichvc,iprob_here,ip,ipoint,iu1(2)
 real(kind=8) :: q_a(4),vrms,dNu,dq,dw,q_top,q_bot,Rah
+real(kind=8) :: plate_mobility,plateness,plasticity_integral,davphi,rinvec(20)
 logical :: output_pressure
 
 call pevrms(vrms,isol1)
+if (tackley.or.(tosi15.and.(tosi15_case==2.or.tosi15_case==4))) then
+   call create_plasticity
+   call find_intP(plasticity_integral)
+endif
 if (ibench_type==300) then
    ! just Stokes solve with cpu output
    if (print_node) write(irefwr,'(2i15,f15.7,f12.2)') nstokes_solves,2*npoint,vrms,cpu_stokes
@@ -109,6 +114,18 @@ call writbs_netcdf('UV_restart.nf',isol1)
 
 noutje=1
 call surfacevel(kmesh1,kprob1,isol1,veloc,veloc_d,noutje)
+if (tosi15.or.tackley) then
+   call find_mobility_plateness_cart(vrms,veloc(3),plate_mobility,plateness)
+   if (print_node) then
+     open(9,file='plates.dat')
+     write(irefwr,*)
+     write(irefwr,'(5a15)') 'Ra','sigma_y','<plasticity>','mobility','plateness'
+     write(9,'(5e15.7)') Ra,sigma_y,plasticity_integral,plate_mobility,plateness
+     write(irefwr,'(5e15.7)') Ra,sigma_y,plasticity_integral,plate_mobility,plateness
+     write(9,'(5a15)') 'Ra','sigma_y','<plasticity>','mobility','plateness'
+     close(9)
+   endif
+endif
 call averageT(1,iuser_here,user_here,avT)
 if (Di > 0.or.compress) then
    call getvisdip
